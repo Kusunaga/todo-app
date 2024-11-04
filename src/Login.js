@@ -1,16 +1,19 @@
 // src/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { auth } from './firebaseConfig';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
-function Login() {
+
+function Login({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // 簡単なバリデーション（実際のアプリではここで認証を行います）
-    if (username === 'user' && password === 'password') {
+    if (username === 'admin' && password === 'admin') {
+      onLogin(); // ログイン成功時に onLogin を呼び出す
       navigate('/todo'); // ログイン成功後に /todo ページへ遷移
     } else {
       alert('ユーザー名またはパスワードが間違っています');
